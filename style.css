@@ -1,0 +1,83 @@
+/* Style for the page background */
+body {
+    background-color: #f7e89d;
+}
+#audioPlayer {
+    width: 1000px;
+    position: absolute;
+    top: 78%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+/* Style for the Play button */
+#playButton {
+    width: 200px;
+    height: 80px;
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none; 
+    cursor: pointer; 
+    position:absolute;
+    top: 90%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Style for the Pause button */
+#pauseButton {
+    width: 200px;
+    height: 80px;
+    background-color: #f44336; 
+    color: white; 
+    padding: 10px 20px; 
+    border: none; 
+    cursor: pointer; 
+    position:absolute;
+    top: 90%;
+    left: 36.5%;
+    transform: translate(-50%, -50%);
+}
+
+/* Style for the Skip button */
+#skipButton {
+    width: 200px;
+    height: 80px;
+    background-color: #2196F3; 
+    color: white; 
+    padding: 10px 20px; 
+    border: none; 
+    cursor: pointer; 
+    position:absolute;
+    top: 90%;
+    left: 63.5%;
+    transform: translate(-50%, -50%);
+}
+
+/* Style for the Go Back button */
+#goBackButton {
+    width: 200px;
+    height: 80px;
+    background-color: #ff9800; 
+    color: white; 
+    padding: 10px 20px; 
+    border: none; 
+    cursor: pointer; 
+    position:absolute;
+    top: 90%;
+    left: 23%;
+    transform: translate(-50%, -50%);
+}
+#playlistButton {
+    width: 200px;
+    height: 80px;
+    background-color: #71004e80; 
+    color: white; 
+    padding: 10px 20px; 
+    border: none; 
+    cursor: pointer; 
+    position:absolute;
+    top: 90%;
+    left: 77%;
+    transform: translate(-50%, -50%);
+}
