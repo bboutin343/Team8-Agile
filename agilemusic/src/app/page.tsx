@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Link from "next/link";
+import React from 'react';
 
 export default function Home() {
   return (
@@ -8,7 +9,7 @@ export default function Home() {
       <head>
         <title>Web Music Player</title>
       </head>
-    <body>
+      <body>
         <Link href="/login" key="login">
           <button className="w-40 h-10 text-center border-r border-black hover:bg-blue-100">Login</button>
         </Link>
@@ -22,7 +23,7 @@ export default function Home() {
         <button id="skipButton">Skip</button>
         <button id="goBackButton">Go Back</button>
         <button id="playlistButton">Change Playlist</button>
-     </body>     
+      </body>     
     </main>
   )
 }
