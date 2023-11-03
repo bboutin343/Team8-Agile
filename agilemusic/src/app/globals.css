@@ -30,7 +30,7 @@ body {
 #playButton {
   width: 200px;
   height: 80px;
-  background-color: #4CAF50;
+  background-color: #008b00;
   color: white;
   padding: 10px 20px;
   border: none; 
@@ -45,7 +45,7 @@ body {
 #pauseButton {
   width: 200px;
   height: 80px;
-  background-color: #f44336; 
+  background-color: #e72400; 
   color: white; 
   padding: 10px 20px; 
   border: none; 
@@ -60,7 +60,7 @@ body {
 #skipButton {
   width: 200px;
   height: 80px;
-  background-color: #2196F3; 
+  background-color: #007aca; 
   color: white; 
   padding: 10px 20px; 
   border: none; 
@@ -75,7 +75,7 @@ body {
 #goBackButton {
   width: 200px;
   height: 80px;
-  background-color: #ff9800; 
+  background-color: #ad6500; 
   color: white; 
   padding: 10px 20px; 
   border: none; 
@@ -88,7 +88,7 @@ body {
 #playlistButton {
   width: 200px;
   height: 80px;
-  background-color: #71004e80; 
+  background-color: #aa6264; 
   color: white; 
   padding: 10px 20px; 
   border: none; 
