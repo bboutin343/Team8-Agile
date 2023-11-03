@@ -1,5 +1,5 @@
 import axios from "axios";
-import {cookies} from 'next/headers'
+import { cookies } from "next/headers";
 
 export async function GET(request: Request) {
     try {
