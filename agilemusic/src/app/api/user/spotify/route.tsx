@@ -7,7 +7,8 @@ export async function GET(request: Request) {
         client_id: "28d7fd7cfe334d9bb116cfea500d2976",
         scope: scope,
         redirect_uri: `http://localhost:3000/api/user/authorized`,
-        state: state}).toString()
+        state: state,
+        show_dialog: 'true'}).toString()
     
         
     
