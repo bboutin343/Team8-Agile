@@ -1,10 +1,19 @@
 import statistics
 import json
+import requests
+import random
 from collections import Counter
 
-def likedsongs():
-    #grabs a list of the liked songs
-    return liked
+def likedsongs(access_token):
+    endpoint = 'https://api.spotify.com/v1/me/tracks'
+    headers = {'Authorization': f'Bearer {access_token}'}
+    response = requests.get(endpoint, headers=headers)
+    # Check if the request was successful (status code 200)
+    if response.status_code == 200:
+        return response.json()['items']
+    else:
+        print(f"Error: {response.status_code}")
+        return None
 
 def extractinfo(songs):
     #extracts the songs and metadata
@@ -30,11 +39,29 @@ def genres(genrelist):
     merged_list = tuple(zip(uniques, percents))
     return merged_list
 
-def createplaylist(daterange, genres, size=20):
-    #find songs from the spotify database that have a releasedate in the
-    #given range and matching genre, then create a playlist of a similar
-    #composition of genre to the user's liked songs and indicated size.
+def createplaylist(daterange, genres, size=20, access_token=None):
+    endpoint = 'https://api.spotify.com/v1/search'
+    headers = {'Authorization': f'Bearer {access_token}'}
+    playlist = []
+    while len(playlist) < size:
+        selected_genre, genre_weight = random.choice(genres)
+        release_year = random.randint(daterange[0], daterange[1])
+        params = {
+            'q': f'genre:"{selected_genre}" year:{release_year}',
+            'type': 'track',
+            'limit': size
+        }
+        response = requests.get(endpoint, headers=headers, params=params)
+        # Check if the request was successful (status code 200)
+        if response.status_code == 200:
+            # Extract and append the first track from the search results
+            track_data = response.json().get('tracks', {}).get('items', [])
+            if track_data:
+                playlist.append(track_data[0])
+        else:
+            print(f"Error: {response.status_code}")
     return playlist
+
 
 liked = likedsongs()
 likedinfo = extractinfo(liked)
