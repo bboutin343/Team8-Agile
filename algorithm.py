@@ -62,8 +62,8 @@ def createplaylist(daterange, genres, size=20, access_token=None):
             print(f"Error: {response.status_code}")
     return playlist
 
-
-liked = likedsongs()
+access_token = "placeholder"
+liked = likedsongs(access_token)
 likedinfo = extractinfo(liked)
 date = []
 genre = []
@@ -72,4 +72,4 @@ for i in likedinfo:
     genre.append(i[2])
 daterange = dates(date)
 genrecomp = genres(genre)
-playlist = createplaylist(daterange, genrecomp, 20)
+playlist = createplaylist(daterange, genrecomp, 20, access_token)
