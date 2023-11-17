@@ -13,6 +13,9 @@ export default function Home() {
         <Link href="/login" key="login">
           <button className="w-40 h-10 text-center border-r border-black hover:bg-blue-100">Login</button>
         </Link>
+        <Link href="/playlists" key="playlists">
+          <button className="w-40 h-10 text-center border-r border-black hover:bg-blue-100">Playlists</button>
+        </Link>
         <h1>Web Music Player</h1>
         <SpotifyTest/>
         <audio id="audioPlayer" controls>
