@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "mongodb": "^6.2.0",
     "axios": "^1.6.2",
     "firebase": "^10.6.0",
     "next": "^13.5.6",
