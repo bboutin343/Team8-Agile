@@ -10,10 +10,10 @@ export default function Home() {
         <title>Web Music Player</title>
       </head>
     <body>
-        <Link href="/login" key="login">
+        <Link legacyBehavior href="/login" key="login">
           <button className="w-40 h-10 text-center border-r border-black hover:bg-blue-100">Login</button>
         </Link>
-        <Link href="/playlists" key="playlists">
+        <Link legacyBehavior href="/playlists" key="playlists">
           <button className="w-40 h-10 text-center border-r border-black hover:bg-blue-100">Playlists</button>
         </Link>
         <h1>Web Music Player</h1>
