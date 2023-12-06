@@ -21,7 +21,7 @@ const songsMethods = {
         };
 
         const insertInfo = await songCollection.insertOne(newSong);
-        if (insertInfo.insertedCount === 0) throw 'Error: Could not add song';
+        if (insertInfo.insertedCount === 0) throw new Error('Error: Could not add song');
 
         return newSong;
     },
@@ -29,7 +29,7 @@ const songsMethods = {
     async getSongById (songId) {
         const songCollection = await songs();
         const song = await songCollection.findOne({ _id: new ObjectId(songId) });
-        if (!song) throw 'Error: Song not found';
+        if (!song) throw new Error('Error: Song not found');
         return song;
     }
 };

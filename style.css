@@ -1,6 +1,6 @@
 /* Style for the page background */
 body {
-    background-color: #f7e89d;
+    background-color: #f0e3a1;
 }
 #audioPlayer {
     width: 1000px;
@@ -55,7 +55,7 @@ body {
 }
 
 /* Style for the Go Back button */
-#goBackButton {
+#previousSongButton {
     width: 200px;
     height: 80px;
     background-color: #ff9800; 
@@ -68,7 +68,7 @@ body {
     left: 23%;
     transform: translate(-50%, -50%);
 }
-#playlistButton {
+#changePlaylistButton {
     width: 200px;
     height: 80px;
     background-color: #71004e80; 
