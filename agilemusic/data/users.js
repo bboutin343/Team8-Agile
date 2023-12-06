@@ -53,6 +53,7 @@ const usersMethods = {
     },
 
     async createPlaylist(userId, playlistName) {
+        console.log(userId)
         validateStringInput(playlistName, "Playlist Name");
     
         const userCollection = await users();
@@ -71,7 +72,7 @@ const usersMethods = {
         if (!updateInfo.matchedCount && !updateInfo.modifiedCount) 
             throw new Error('Error: Could not create playlist');
     
-        return await this.getUserById(userId);
+        return playlistId;
     },
     
     async addSongToPlaylist(userId, playlistId, songId) {
@@ -84,7 +85,7 @@ const usersMethods = {
     
         const updateInfo = await userCollection.updateOne(
             { _id: new ObjectId(userId), "playlists.playlistId": new ObjectId(playlistId) },
-            { $addToSet: { "playlists.$.songs": new ObjectId(songId) } }
+            { $addToSet: { "playlists.$.songs": songId } }
         );
     
         if (!updateInfo.matchedCount && !updateInfo.modifiedCount) 
