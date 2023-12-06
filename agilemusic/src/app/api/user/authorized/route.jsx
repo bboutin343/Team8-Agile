@@ -2,7 +2,7 @@ import axios from "axios";
 import { cookies } from "next/headers";
 
 //Request access token
-export async function GET(request: Request) {
+export async function GET(request) {
     try {
         const url = new URL(request.url)
         const code=url.searchParams.get('code')
