@@ -1,5 +1,6 @@
 import axios from "axios";
 import { cookies } from "next/headers";
+import { ObjectId } from "mongodb";
 
 //Request access token
 export async function GET(request) {
@@ -34,7 +35,10 @@ export async function GET(request) {
 
         const userData = await axios.get('https://api.spotify.com/v1/me', {headers: {'Authorization': `Bearer ${data.access_token}`}})
         const spotifyUser = userData.data
+        const newUser = await axios.post('http://localhost:3000/api/user', {username:spotifyUser.display_name})
+        console.log(newUser.data)
         cookies().set('username', spotifyUser.display_name)
+        cookies().set('userId', newUser.data._id.toString())
         return Response.redirect('http://localhost:3000/')
     }catch(e) {
         return Response.json(e)
