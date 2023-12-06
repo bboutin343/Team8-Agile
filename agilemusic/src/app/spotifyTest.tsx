@@ -2,7 +2,6 @@
 import Link from "next/link";
 import axios from "axios";
 import React, {useState} from 'react'
-import { access } from "fs";
 import {useCookies} from 'next-client-cookies'
 
 export default function SpotifyTest() {
