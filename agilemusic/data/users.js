@@ -14,7 +14,7 @@ const usersMethods = {
         };
 
         const insertInfo = await userCollection.insertOne(newUser);
-        if (insertInfo.insertedCount === 0) throw `Error: Could not add user "${username}"`;
+        if (insertInfo.insertedCount === 0) throw new Error(`Error: Could not add user "${username}"`);
 
         return newUser;
     },
@@ -27,7 +27,7 @@ const usersMethods = {
             { $addToSet: { likedSongs: new ObjectId(songId) } }
         );
 
-        if (!updateInfo.matchedCount && !updateInfo.modifiedCount) throw 'Error: Could not like song';
+        if (!updateInfo.matchedCount && !updateInfo.modifiedCount) throw new Error('Error: Could not like song');
 
         return await this.getUserById(userId);
     },
@@ -40,7 +40,7 @@ const usersMethods = {
             { $pull: { likedSongs: new ObjectId(songId) } }
         );
 
-        if (!updateInfo.matchedCount && !updateInfo.modifiedCount) throw 'Error: Could not dislike song';
+        if (!updateInfo.matchedCount && !updateInfo.modifiedCount) throw new Error('Error: Could not dislike song');
 
         return await this.getUserById(userId);
     },
@@ -48,7 +48,7 @@ const usersMethods = {
     async getUserById(userId) {
         const userCollection = await users();
         const user = await userCollection.findOne({ _id: new ObjectId(userId) });
-        if (!user) throw `Error: User with userId "${userId}" not found`;
+        if (!user) throw new Error(`Error: User with userId "${userId}" not found`);
         return user;
     },
 
@@ -57,10 +57,10 @@ const usersMethods = {
     
         const userCollection = await users();
         const userExists = await userCollection.findOne({ _id: new ObjectId(userId) });
-        if (!userExists) throw 'Error: User not found';
+        if (!userExists) throw new Error('Error: User not found');
     
         const playlistExists = await userCollection.findOne({ _id: new ObjectId(userId), "playlists.playlistName": playlistName });
-        if (playlistExists) throw 'Error: Playlist already exists';
+        if (playlistExists) throw new Error('Error: Playlist already exists');
     
         const playlistId = new ObjectId();
         const updateInfo = await userCollection.updateOne(
@@ -69,7 +69,7 @@ const usersMethods = {
         );
     
         if (!updateInfo.matchedCount && !updateInfo.modifiedCount) 
-            throw 'Error: Could not create playlist';
+            throw new Error('Error: Could not create playlist');
     
         return await this.getUserById(userId);
     },
@@ -77,10 +77,10 @@ const usersMethods = {
     async addSongToPlaylist(userId, playlistId, songId) {
         const userCollection = await users();
         const userExists = await userCollection.findOne({ _id: new ObjectId(userId) });
-        if (!userExists) throw 'Error: User not found';
+        if (!userExists) throw new Error('Error: User not found');
     
         const playlistExists = await userCollection.findOne({ _id: new ObjectId(userId), "playlists.playlistId": new ObjectId(playlistId) });
-        if (!playlistExists) throw 'Error: Playlist not found';
+        if (!playlistExists) throw new Error('Error: Playlist not found');
     
         const updateInfo = await userCollection.updateOne(
             { _id: new ObjectId(userId), "playlists.playlistId": new ObjectId(playlistId) },
@@ -88,7 +88,7 @@ const usersMethods = {
         );
     
         if (!updateInfo.matchedCount && !updateInfo.modifiedCount) 
-            throw 'Error: Could not add song to playlist';
+            throw new Error('Error: Could not add song to playlist');
     
         return await this.getUserById(userId);
     },
@@ -96,10 +96,10 @@ const usersMethods = {
     async removeSongFromPlaylist(userId, playlistId, songId) {
         const userCollection = await users();
         const userExists = await userCollection.findOne({ _id: new ObjectId(userId) });
-        if (!userExists) throw 'Error: User not found';
+        if (!userExists) throw new Error('Error: User not found');
     
         const playlistExists = await userCollection.findOne({ _id: new ObjectId(userId), "playlists.playlistId": new ObjectId(playlistId) });
-        if (!playlistExists) throw 'Error: Playlist not found';
+        if (!playlistExists) throw new Error('Error: Playlist not found');
     
         const updateInfo = await userCollection.updateOne(
             { _id: new ObjectId(userId), "playlists.playlistId": new ObjectId(playlistId) },
@@ -107,7 +107,7 @@ const usersMethods = {
         );
     
         if (!updateInfo.matchedCount && !updateInfo.modifiedCount) 
-            throw 'Error: Could not remove song from playlist';
+            throw new Error('Error: Could not remove song from playlist');
     
         return await this.getUserById(userId);
     },
@@ -117,10 +117,10 @@ const usersMethods = {
     
         const userCollection = await users();
         const userExists = await userCollection.findOne({ _id: new ObjectId(userId) });
-        if (!userExists) throw 'Error: User not found';
+        if (!userExists) throw new Error('Error: User not found');
     
         const playlistExists = await userCollection.findOne({ _id: new ObjectId(userId), "playlists.playlistId": new ObjectId(playlistId) });
-        if (!playlistExists) throw 'Error: Playlist not found';
+        if (!playlistExists) throw new Error('Error: Playlist not found');
     
         const updateInfo = await userCollection.updateOne(
             { _id: new ObjectId(userId), "playlists.playlistId": new ObjectId(playlistId) },
@@ -128,7 +128,7 @@ const usersMethods = {
         );
     
         if (!updateInfo.matchedCount && !updateInfo.modifiedCount) 
-            throw 'Error: Could not update playlist';
+            throw new Error('Error: Could not update playlist');
     
         return await this.getUserById(userId);
     },
@@ -136,10 +136,10 @@ const usersMethods = {
     async deletePlaylist(userId, playlistId) {
         const userCollection = await users();
         const userExists = await userCollection.findOne({ _id: new ObjectId(userId) });
-        if (!userExists) throw 'Error: User not found';
+        if (!userExists) throw new Error('Error: User not found');
     
         const playlistExists = await userCollection.findOne({ _id: new ObjectId(userId), "playlists.playlistId": new ObjectId(playlistId) });
-        if (!playlistExists) throw 'Error: Playlist not found';
+        if (!playlistExists) throw new Error('Error: Playlist not found');
     
         const updateInfo = await userCollection.updateOne(
             { _id: new ObjectId(userId) },
@@ -147,7 +147,7 @@ const usersMethods = {
         );
     
         if (!updateInfo.matchedCount && !updateInfo.modifiedCount) 
-            throw 'Error: Could not delete playlist';
+            throw new Error('Error: Could not delete playlist');
     
         return await this.getUserById(userId);
     }    
