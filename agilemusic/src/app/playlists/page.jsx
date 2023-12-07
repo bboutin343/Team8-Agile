@@ -3,12 +3,15 @@ import Link from "next/link";
 import axios from "axios";
 import React, {useState} from 'react'
 import {useCookies} from 'next-client-cookies'
+import {redirect} from 'next/navigation'
 
 export default function CreatePlaylist() {
 	const cookies = useCookies()
 	let playlistId
 	let userId = cookies.get('userId')
 	const [formData, setFormData] = useState({playlistName: ''})
+	const [created, setCreated] = useState(false)
+	const [playlistLink, setLink] = useState(undefined)
 	const handleChange = (e) => {
         setFormData((prev) => ({...prev, [e.target.name]: e.target.value}));
     };
@@ -23,7 +26,11 @@ export default function CreatePlaylist() {
 		})
 		.then(response => {
 			if (response) {
+				console.log('response')
 				playlistId = response.data
+				console.log(playlistId)
+				setCreated(true)
+				setLink(`http://localhost:3000/playlists/${playlistId}`)
 			}
 		})
 	}
@@ -41,6 +48,7 @@ export default function CreatePlaylist() {
 				</label>
 			</div>
 			<button onClick={() => createPlaylist()}>Create Playlist</button>	
+			{created && (<div><Link href={playlistLink}>Playlist created! click here to go to it</Link></div>)}
 		</>
 	);
 }

@@ -13,7 +13,7 @@ export default function Home() {
   let userId = cookies.get('userId')
   const [playlists, setPlaylists] = useState(undefined)
   const [cards, setCards] = useState(undefined)
-  const [notFound, setNotFound] = useState(false)
+  const [notFound, setNotFound] = useState(true)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -26,6 +26,9 @@ export default function Home() {
         }));
         if (data.playlists.length == 0) {
           setNotFound(true)
+        }
+        else {
+          setNotFound(false)
         }
       }catch(e) {
         return (
@@ -41,20 +44,18 @@ export default function Home() {
   }, [])
   return (
     
-    <main>
+    <html>
       <head>
         <title>Web Music Player</title>
       </head>
     <body>
         <Link href="/playlists" key="playlists">
-          <button className="w-40 h-10 text-center border-r border-black hover:bg-blue-100">Playlists</button>
-        </Link>
-        <SpotifyTest/>
-        <Link href="/playlists" key="playlists">
           <button className="w-40 h-10 text-center border-r border-black hover:bg-blue-100">Create a Playlist</button>
         </Link>
+        <SpotifyTest/>
         <h1>Web Music Player</h1>
         {loading && (<div><p>Loading</p></div>)}
+        
         {!loading && (<Grid container spacing={2} sx={{flexGrow: 1, flexDirection: 'row'}}>
                     {cards}
                 </Grid>)}
@@ -67,8 +68,7 @@ export default function Home() {
         <button id="pauseButton">Pause</button>
         <button id="skipButton">Skip</button>
         <button id="goBackButton">Go Back</button>
-        <button id="playlistButton">Change Playlist</button>
      </body>     
-    </main>
+    </html>
   )
 }

@@ -28,10 +28,6 @@ export default function SpotifyTest() {
         return (
             <div>
                 <p>logged in as {username}</p>
-                <p>Song: Let It Be by The Beatles</p>
-                <button onClick={handleLike}>
-                    {like}
-                </button>
             </div>
         )
     }
@@ -39,7 +35,7 @@ export default function SpotifyTest() {
         return (
             <div>
                 <Link href="/api/user/spotify">
-                    <button className="w-40 h-10 text-center border-r border-black hover:bg-blue-100">
+                    <button className="w-40 h-10 text-center border-r border-black hover:bg-blue-100" type="button">
                         Login to Spotify
                     </button>
                 </Link>
