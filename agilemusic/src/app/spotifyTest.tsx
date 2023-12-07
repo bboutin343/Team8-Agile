@@ -39,7 +39,7 @@ export default function SpotifyTest() {
         return (
             <div>
                 <Link href="/api/user/spotify">
-                    <button type="button">
+                    <button className="w-40 h-10 text-center border-r border-black hover:bg-blue-100">
                         Login to Spotify
                     </button>
                 </Link>
