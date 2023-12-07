@@ -49,15 +49,16 @@ export default function Home() {
         <Link href="/playlists" key="playlists">
           <button className="w-40 h-10 text-center border-r border-black hover:bg-blue-100">Playlists</button>
         </Link>
-        <h1>Web Music Player</h1>
         <SpotifyTest/>
+        <Link href="/playlists" key="playlists">
+          <button className="w-40 h-10 text-center border-r border-black hover:bg-blue-100">Create a Playlist</button>
+        </Link>
+        <h1>Web Music Player</h1>
         {loading && (<div><p>Loading</p></div>)}
         {!loading && (<Grid container spacing={2} sx={{flexGrow: 1, flexDirection: 'row'}}>
                     {cards}
                 </Grid>)}
-        <Link href="/playlists" key="playlists">
-          <button className="w-40 h-10 text-center border-r border-black hover:bg-blue-100">Create a Playlist</button>
-        </Link>
+        
         <audio id="audioPlayer" controls>
             <source src="your-audio-file.mp3" type="audio/mpeg"></source>
             Your browser does not support the audio element.
