@@ -15,6 +15,7 @@ import {
 export default function PlaylistCards({playlist}) {
     const cookies = useCookies()
     const [isPlaying, setPlaying] = useState(false)
+    const [clicked, isClicked] = useState(false)
     useEffect(() => {
         let current = cookies.get('currentPlaylist')
         if (current == playlist.playlistId) {
@@ -23,9 +24,11 @@ export default function PlaylistCards({playlist}) {
         else {
             setPlaying(false)
         }
-    }, [cookies])
+    }, [clicked])
     const playPlaylist = () => {
         cookies.set('currentPlaylist', playlist.playlistId)
+        isClicked(true)
+        
     };
     return (
         <Grid item xs={12} sm={7} md={5} lg={4} xl={3} key={playlist.playlistId}>
