@@ -13,9 +13,11 @@ import {
   } from '@mui/material';
 
 export default function PlaylistCards({playlist}) {
+    console.log('card', playlist)
     const cookies = useCookies()
     const [isPlaying, setPlaying] = useState(false)
     const [clicked, isClicked] = useState(false)
+    let accessToken = cookies.get('accessToken')
     useEffect(() => {
         let current = cookies.get('currentPlaylist')
         if (current == playlist.playlistId) {
@@ -26,10 +28,22 @@ export default function PlaylistCards({playlist}) {
         }
     }, [clicked])
     const playPlaylist = () => {
+        console.log(playlist.songs)
         cookies.set('currentPlaylist', playlist.playlistId)
+        cookies.set('playingPlaylist', playlist.songs)
+        let songs = []
+        for (let x of playlist.songs) {
+            console.log(x)
+            songs.push(`spotify:track:${x}`)
+            //console.log(songs)
+        }
+        axios.put(`https://api.spotify.com/v1/me/player/play?device_id=${cookies.get('device')}`, {uris: songs}, {headers: {'Authorization': `Bearer ${accessToken}`}})
         isClicked(true)
         
     };
+    const pausePlaylist = () => {
+        setPlaying(false)
+    }
     return (
         <Grid item xs={12} sm={7} md={5} lg={4} xl={3} key={playlist.playlistId}>
             <Card
@@ -60,8 +74,7 @@ export default function PlaylistCards({playlist}) {
                         </CardContent>
                     </Link>
                 </CardActionArea>
-                {!isPlaying && (<button onClick={playPlaylist}>PLAY</button>)}
-                {isPlaying && (<p>NOW PLAYING</p>)}
+                <button onClick={() => {playPlaylist()}}>PLAY</button>
             </Card>
         </Grid>
     )

@@ -7,6 +7,7 @@ import {useCookies} from 'next-client-cookies'
 import React, {useState, useEffect} from 'react'
 import PlaylistCards from './PlaylistCards.jsx'
 import {Grid} from '@mui/material'
+import Player from './player'
 
 export default function Home() {
   const cookies = useCookies();
@@ -15,13 +16,16 @@ export default function Home() {
   const [cards, setCards] = useState(undefined)
   const [notFound, setNotFound] = useState(true)
   const [loading, setLoading] = useState(true)
+  let accessToken = cookies.get('accessToken')
 
   useEffect(() => {
     async function fetchPlaylists() {
       try {
         const {data} = await axios.get(`http://localhost:3000/api/user?id=${userId}`)
         setPlaylists(data.playlists)
+        console.log(data.playlists)
         setCards(data.playlists.map((playlist: Object) => {
+          console.log(playlist)
           return <PlaylistCards playlist={playlist}/>
         }));
         if (data.playlists.length == 0) {
@@ -60,14 +64,7 @@ export default function Home() {
                     {cards}
                 </Grid>)}
         
-        <audio id="audioPlayer" controls>
-            <source src="your-audio-file.mp3" type="audio/mpeg"></source>
-            Your browser does not support the audio element.
-        </audio>
-        <button id="playButton">Play</button>
-        <button id="pauseButton">Pause</button>
-        <button id="skipButton">Skip</button>
-        <button id="goBackButton">Go Back</button>
+        {accessToken ? <Player token={accessToken}/>: (<div>Log In to play music</div>) }
      </body>     
     </html>
   )
